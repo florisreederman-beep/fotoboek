@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fotoboek</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Bovenbalk: naam van de site + wie er is ingelogd -->
+  <header class="topbar">
+    <h1>Fotoboek</h1>
+    <div id="user-bar" hidden>
+      <span id="user-name"></span>
+      <button id="logout-button" type="button" class="link-button">Uitloggen</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Meldingen (fouten, bevestigingen) -->
+    <p id="message" hidden></p>
+
+    <!-- ============ SCHERM 1: inloggen / registreren ============ -->
+    <section id="auth-view" hidden>
+      <form id="login-form" class="card">
+        <h2>Inloggen</h2>
+        <label>E-mail <input id="login-email" type="email" required autocomplete="email"></label>
+        <label>Wachtwoord <input id="login-password" type="password" required autocomplete="current-password"></label>
+        <button type="submit">Inloggen</button>
+        <p class="switch">Nog geen account? <button type="button" class="link-button" id="show-signup">Registreer</button></p>
+      </form>
+
+      <form id="signup-form" class="card" hidden>
+        <h2>Account maken</h2>
+        <label>Gebruikersnaam <input id="signup-username" type="text" required minlength="2" maxlength="30"></label>
+        <label>E-mail <input id="signup-email" type="email" required autocomplete="email"></label>
+        <label>Wachtwoord (min. 6 tekens) <input id="signup-password" type="password" required minlength="6" autocomplete="new-password"></label>
+        <button type="submit">Account maken</button>
+        <p class="switch">Al een account? <button type="button" class="link-button" id="show-login">Log in</button></p>
+      </form>
+    </section>
+
+    <!-- ============ SCHERM 2: de site zelf (alleen ingelogd) ============ -->
+    <section id="app-view" hidden>
+      <!-- Alleen zichtbaar voor de host -->
+      <form id="upload-form" class="card" hidden>
+        <h2>Nieuwe foto posten</h2>
+        <input id="photo-input" type="file" accept="image/*" required>
+        <input id="caption-input" type="text" placeholder="Schrijf een bijschrift (optioneel)" maxlength="300">
+        <button id="upload-button" type="submit">Posten</button>
+      </form>
+
+      <!-- Hier zet app.js alle foto's neer -->
+      <div id="feed"></div>
+    </section>
+  </main>
+
+  <!-- Scripts: eerst de Supabase-bibliotheek, dan jouw instellingen, dan de app -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
